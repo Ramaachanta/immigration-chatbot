@@ -38,7 +38,7 @@ Before you begin, ensure you have met the following requirements:
 
 ## Running the Application
    
-   npm run dev
+    npm run dev
 
 ## Testing
     
