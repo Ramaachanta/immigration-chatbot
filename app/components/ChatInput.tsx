@@ -7,6 +7,7 @@ interface ChatInputProps {
     onSendMessage: (message: string) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
     // State to manage messages, input value, user details, and typing status
     const [messages, setMessages] = useState<{ text: string; sender: 'user' | 'ai' }[]>([]);
@@ -167,7 +168,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
                                     className="quick-prompt-button"
                                     onClick={() => handleQuickSelect(category)}
                                 >
-                                    {category}
+                                    {category.replace(/'/g, "&apos;")}
                                 </button>
                             ))}
                         </>
