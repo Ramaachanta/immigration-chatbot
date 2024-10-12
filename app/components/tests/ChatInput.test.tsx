@@ -34,7 +34,7 @@ describe('ChatInput Component', () => {
         // Enter name
         fireEvent.change(getByPlaceholderText("Enter your name..."), { target: { value: 'John' } });
         fireEvent.click(getByText('Send'));
-
+    
         // Enter invalid country
         fireEvent.change(getByPlaceholderText("Type your message here..."), { target: { value: 'InvalidCountry' } });
         fireEvent.click(getByText('Send'));
@@ -42,12 +42,12 @@ describe('ChatInput Component', () => {
         // Log rendered output for debugging
         console.log(screen.debug()); // Check rendered output
         
-        // Use a function to match the error message
-        expect(screen.getByText((content, element) => {
+        // Use a function to match the error message without the 'element' argument
+        expect(screen.getByText((content) => {
             return content.includes('Sorry,') && content.includes('InvalidCountry') && content.includes('is not a valid country.');
         })).toBeInTheDocument();
     });
-
+    
     test('shows valid AI response for valid country selection', () => {
         render(<ChatInput onSendMessage={jest.fn()} />);
         
