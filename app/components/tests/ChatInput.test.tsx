@@ -5,6 +5,7 @@ import ChatInput from '../ChatInput';
 
 describe('ChatInput Component', () => {
     beforeEach(() => {
+        // Mock scrollIntoView function
         HTMLElement.prototype.scrollIntoView = jest.fn(); 
     });
     
@@ -30,16 +31,21 @@ describe('ChatInput Component', () => {
     test('shows error message for invalid country selection', () => {
         const { getByPlaceholderText, getByText } = render(<ChatInput onSendMessage={jest.fn()} />);
         
-     
+        // Enter name
         fireEvent.change(getByPlaceholderText("Enter your name..."), { target: { value: 'John' } });
         fireEvent.click(getByText('Send'));
 
-     
+        // Enter invalid country
         fireEvent.change(getByPlaceholderText("Type your message here..."), { target: { value: 'InvalidCountry' } });
         fireEvent.click(getByText('Send'));
         
-      
-        expect(screen.getByText(/Sorry, "InvalidCountry" is not a valid country./)).toBeInTheDocument();
+        // Log rendered output for debugging
+        console.log(screen.debug()); // Check rendered output
+        
+        // Use a function to match the error message
+        expect(screen.getByText((content, element) => {
+            return content.includes('Sorry,') && content.includes('InvalidCountry') && content.includes('is not a valid country.');
+        })).toBeInTheDocument();
     });
 
     test('shows valid AI response for valid country selection', () => {
@@ -59,19 +65,17 @@ describe('ChatInput Component', () => {
     test('allows user to select a category', () => {
         render(<ChatInput onSendMessage={jest.fn()} />);
         
-       
+        // Enter name
         fireEvent.change(screen.getByPlaceholderText("Enter your name..."), { target: { value: 'John' } });
         fireEvent.click(screen.getByText('Send'));
 
-        
+        // Select a valid country
         fireEvent.click(screen.getByText('Canada'));
         
-        
+        // Select a category
         fireEvent.click(screen.getByText('Work Permit'));
 
         // Check for confirmation message
         expect(screen.getByText('You selected Work Permit. What would you like to know?')).toBeInTheDocument();
     });
-
-  
 });

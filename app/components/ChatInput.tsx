@@ -59,7 +59,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
                     setCountrySelected(selectedCountry);
                     aiResponse = `You selected ${selectedCountry}. What category is your question about?`;
                 } else {
-                    aiResponse = `Sorry, "${selectedCountry}" is not a valid country. Please choose from ${validCountries.join(", ")}.`;
+                    aiResponse = `Sorry, &quot;${selectedCountry}&quot; is not a valid country. Please choose from ${validCountries.join(", ")}.`;
                 }
             }
             // Category selection handling
@@ -69,7 +69,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
                     setCategorySelected(selectedCategory);
                     aiResponse = `You selected ${selectedCategory}. What would you like to know?`;
                 } else {
-                    aiResponse = `Sorry, "${selectedCategory}" is not a valid category. Please choose from ${validCategories.join(", ")}.`;
+                    aiResponse = `Sorry, &quot; ${selectedCategory}&quot; is not a valid category. Please choose from ${validCategories.join(", ")}.`;
                 }
             }
             // Check if the question is valid
@@ -168,7 +168,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
                                     className="quick-prompt-button"
                                     onClick={() => handleQuickSelect(category)}
                                 >
-                                    {category.replace(/'/g, "&apos;")}
+                                    {category}
                                 </button>
                             ))}
                         </>
