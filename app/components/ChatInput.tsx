@@ -59,6 +59,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
                     setCountrySelected(selectedCountry);
                     aiResponse = `You selected ${selectedCountry}. What category is your question about?`;
                 } else {
+                    // eslint-disable-next-line react/no-unescaped-entities
                     aiResponse = `Sorry, '${selectedCountry}' is not a valid country. Please choose from ${validCountries.join(", ")}.`;
                 }
             }
@@ -69,6 +70,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
                     setCategorySelected(selectedCategory);
                     aiResponse = `You selected ${selectedCategory}. What would you like to know?`;
                 } else {
+                    // eslint-disable-next-line react/no-unescaped-entities
                     aiResponse = `Sorry, '${selectedCategory}' is not a valid category. Please choose from ${validCategories.join(", ")}.`;
                 }
             }
